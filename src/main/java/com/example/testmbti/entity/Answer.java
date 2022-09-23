@@ -2,6 +2,7 @@ package com.example.testmbti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,15 +23,15 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Answer {
     @Id // pk 컬럼
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 컬럼 추가시 자동 생성
-    private Integer id;
+    private Long id;
 
     @Column
     private String content; // 답변 내용
 
     @Column
-    private String character; // 답변에 따른 성향
+    private String personality; // 답변에 따른 성향
 
-    @ManyToOne // 2개의 질문 엔티티가(many), 하나의 question(one)과 연관
+    @ManyToOne(fetch = FetchType.LAZY) // 2개의 질문 엔티티가(many), 하나의 question(one)과 연관, Lazy로 지연로딩 설정
     @OnDelete(action = OnDeleteAction.CASCADE) // 종속성으로 인한 삭제오류를 방지하기 위해 CASCADE를 delete에 설정
     @JoinColumn(name = "question_id") // 조인 컬럼으로 컬럼명은 question_id 로 생성됨
     private Question question;

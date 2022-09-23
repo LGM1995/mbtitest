@@ -2,11 +2,15 @@ package com.example.testmbti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +26,10 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Result {
     @Id // pk 컬럼
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 컬럼 추가시 자동 생성
-    private Integer id;
+    private Long id;
+
+    @Column
+    private String name;
 
     @Column
     private String title;
@@ -31,10 +38,14 @@ public class Result {
     private String content;
 
     @Column
-    private Integer count;
+    private Long count;
 
-    @ManyToOne // 2개의 질문 엔티티가(many), 하나의 question(one)과 연관
-    @OnDelete(action = OnDeleteAction.CASCADE) // 종속성으로 인한 삭제오류를 방지하기 위해 CASCADE를 delete에 설정
-    @JoinColumn(name = "mbti_id") // 조인 컬럼으로 컬럼명은 mbti_id 로 생성됨
-    private Mbti mbti;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "type_id")
+    private Type type;
+
+    public void countUp() {
+        this.count = this.getCount() + 1;
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.testmbti.dto;
 
+import com.example.testmbti.entity.Answer;
 import com.example.testmbti.entity.Question;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +18,17 @@ import lombok.Setter;
  * Service가 DTO를 Entity로 변환하여 JpaRepositrory로 CRUD 진행
  */
 public class QuestionDto {
-    private Integer id;
+    private Long id;
     private String content;
 
-    /* questionDto를 Entity로 변환 */
-    public Question toEntity() {
-        return new Question(id, content);
+    private List<Answer> answers;
+
+    /* Entity를 DTO로 변환 */
+    public static QuestionDto toDto(Question question) {
+        return new QuestionDto(
+            question.getId(),
+            question.getContent(),
+            question.getAnswers()
+        );
     }
 }

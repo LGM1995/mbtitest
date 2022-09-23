@@ -1,6 +1,7 @@
 package com.example.testmbti.service;
 
 import com.example.testmbti.entity.Answer;
+import com.example.testmbti.entity.Mbti;
 import com.example.testmbti.entity.Question;
 import com.example.testmbti.entity.Result;
 import com.example.testmbti.repository.QuestionRepository;
@@ -11,16 +12,15 @@ import org.springframework.stereotype.Service;
 
 @Service // 서비스 객체를 스트링 부트에 생성
 public class ResultService {
+
     @Autowired
     private ResultRepository resultRepository;
 
-    /* 모든 결과 조회 */
-    public List<Result> list() {
-        return resultRepository.findAll();
+    public Result showAndUpdate(Mbti mbti) {
+        Result target = resultRepository.findByMbti(mbti);
+        target.countUp();
+        return resultRepository.save(target);
     }
 
-    /* mbti_id로 조회 */
-    public List<Result> findByMbtiIdList(Integer mbtiId) {
-        return resultRepository.findByMbtiId(mbtiId);
-    }
+
 }

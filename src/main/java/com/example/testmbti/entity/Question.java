@@ -1,10 +1,16 @@
 package com.example.testmbti.entity;
 
+import com.example.testmbti.dto.QuestionDto;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,9 +24,12 @@ import lombok.NoArgsConstructor;
 public class Question {
     @Id // 대표값 pk 설정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB가 id 값을 순차적으로 자동생성
-    private Integer id; // Long?? Integer?? 뭐가 더 좋을까
+    private Long id;
 
     @Column // 테이블 생성시 해당 변수명으로 자동 매핑하여 생성(name = "xxx";)로 변경가능
     private String content; // 질문의 내용
+
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
 
 }

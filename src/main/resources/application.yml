@@ -4,3 +4,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/testmbti
     username: postgres
     password: 0528
+    data: classpath:/data.sql
+  jpa:
+    hibernate:
+      ddl-auto: update

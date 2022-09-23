@@ -15,17 +15,8 @@ public class AnswerService {
     @Autowired
     private AnswerRepository answerRepository;
 
-    @Autowired
-    private QuestionRepository questionRepository;
-
-    /* 모든 대답 조회 */
-    public List<Answer> list() {
-        return answerRepository.findAll();
-    }
-
-    /* question_id로 대답 조회 */
-    public List<Answer> findByQuestionIdList(Integer questionId) {
+    // questionId에 해당하는 두개의 answer를 반환
+    public List<Answer> answerList(Long questionId) {
         return answerRepository.findByQuestionId(questionId);
     }
-
 }

@@ -14,28 +14,11 @@ import lombok.NoArgsConstructor;
 @Getter // Getter 자동 생성
 @Builder // Setter를 사용하지 않고 Builder와 Constructor를 사용하여 객체의 안전성과 일관성 보장
 public class ResultDto {
-    private Integer id;
+    private Long id;
+    private String name;
     private String title;
     private String content;
-    private Integer count;
-
-    /* JSON 은 xx_xx식의 스네이크 표기법을 사용하고
-     * Java는 xxxXx식의 카멜 표기법을 사용하기 때문에
-     * JsonProperty를 두어 이름을 매핑 시켜준다.
-     * class에 걸어서 전체를 컬럼에 대하여 사용할 수도 있다.
-     */
-    @JsonProperty("mbti_id")
-    private Integer mbtiId;
-
-    /* Entity를 DTO로 변환 */
-    public static ResultDto toDto(Result result) {
-        return new ResultDto(
-            result.getId(),
-            result.getTitle(),
-            result.getContent(),
-            result.getCount(),
-            result.getMbti().getId()
-        );
-    }
+    private Long count;
+    private Mbti mbti;
 
 }
