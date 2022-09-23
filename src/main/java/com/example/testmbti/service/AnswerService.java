@@ -15,8 +15,4 @@ public class AnswerService {
     @Autowired
     private AnswerRepository answerRepository;
 
-    // questionId에 해당하는 두개의 answer를 반환
-    public List<Answer> answerList(Long questionId) {
-        return answerRepository.findByQuestionId(questionId);
-    }
 }

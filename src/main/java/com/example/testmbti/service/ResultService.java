@@ -16,11 +16,5 @@ public class ResultService {
     @Autowired
     private ResultRepository resultRepository;
 
-    public Result showAndUpdate(Mbti mbti) {
-        Result target = resultRepository.findByMbti(mbti);
-        target.countUp();
-        return resultRepository.save(target);
-    }
-
 
 }

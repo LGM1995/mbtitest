@@ -31,10 +31,10 @@ public class Result {
     @Column
     private String name;
 
-    @Column
+    @Column(length = 1000)
     private String title;
 
-    @Column
+    @Column(length = 1000)
     private String content;
 
     @Column
