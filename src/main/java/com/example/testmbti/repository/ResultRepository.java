@@ -15,4 +15,11 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     @Override
     @EntityGraph(attributePaths = {"type"})
     List<Result> findAll();
+
+    @Query(value =
+        "SELECT * " +
+            "FROM result " +
+            "WHERE type_id = :typeId",
+        nativeQuery = true)
+    List<Result> findByTypeId(@Param("typeId") Long typeId);
 }
